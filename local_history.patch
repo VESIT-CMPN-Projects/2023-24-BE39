@@ -1,0 +1,823 @@
+Index: app/src/main/res/layout/activity_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_home.xml b/app/src/main/res/layout/activity_home.xml
+--- a/app/src/main/res/layout/activity_home.xml	
++++ b/app/src/main/res/layout/activity_home.xml	(date 1712636431878)
+@@ -99,7 +99,7 @@
+                 android:text="Find a Doctor"
+                 android:textSize="18sp"
+                 android:clickable="true"
+-                android:onClick="openFindDoctorActivity"
++                android:onClick="GoogleMapsActivity"
+                 android:focusable="true" />
+         </androidx.cardview.widget.CardView>
+ 
+Index: app/src/main/res/layout/activity_google_maps.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_google_maps.xml b/app/src/main/res/layout/activity_google_maps.xml
+new file mode 100644
+--- /dev/null	(date 1712636431777)
++++ b/app/src/main/res/layout/activity_google_maps.xml	(date 1712636431777)
+@@ -0,0 +1,46 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".GoogleMapsActivity">
++
++    <fragment
++        android:id="@+id/autocomplete_fragment_container"
++        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_above="@+id/btn_neurosurgeon"
++        android:layout_alignParentTop="true"
++        android:layout_margin="16dp"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="16dp"
++        android:layout_marginEnd="16dp"
++        android:layout_marginBottom="722dp"
++        tools:context=".GoogleMapsActivity" />
++
++    <Button
++        android:id="@+id/btn_neurosurgeon"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_alignParentStart="true"
++        android:layout_alignParentBottom="true"
++        android:layout_marginStart="104dp"
++        android:layout_marginTop="16dp"
++        android:layout_marginEnd="16dp"
++        android:layout_marginBottom="86dp"
++        android:text="Find Neurosurgeons" />
++
++    <Button
++        android:id="@+id/btn_dermatologist"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_alignParentEnd="true"
++        android:layout_alignParentBottom="true"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="16dp"
++        android:layout_marginEnd="96dp"
++        android:layout_marginBottom="28dp"
++        android:text="Find Dermatologists" />
++
++</RelativeLayout>
+Index: app/src/main/res/layout/activity_open_find_doctor.xml
+===================================================================
+diff --git a/app/src/main/res/layout/activity_open_find_doctor.xml b/app/src/main/res/layout/activity_open_find_doctor.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/activity_open_find_doctor.xml	
++++ /dev/null	
+@@ -1,450 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:background="@drawable/bg_crop"
+-    tools:context=".openFindDoctorActivity">
+-
+-    <androidx.core.widget.NestedScrollView
+-        android:id="@+id/nestedScrollView"
+-        android:layout_width="0dp"
+-        android:layout_height="0dp"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent">
+-        <LinearLayout
+-            android:layout_width="match_parent"
+-            android:layout_height="match_parent"
+-            android:gravity="center"
+-            android:paddingHorizontal="25dp"
+-            android:paddingVertical="15dp"
+-            android:orientation="vertical">
+-
+-            <TextView
+-                android:layout_width="wrap_content"
+-                android:text="Find your Desired Doctor"
+-                android:textStyle="bold"
+-                android:textSize="30dp"
+-                android:textColor="#000"
+-                android:layout_marginTop="20dp"
+-                android:layout_height="wrap_content"/>
+-
+-
+-            <HorizontalScrollView
+-                android:layout_width="match_parent"
+-                android:scrollbars="none"
+-                android:layout_height="wrap_content">
+-                <LinearLayout
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="match_parent"
+-                    android:orientation="horizontal" >
+-
+-
+-                    <androidx.cardview.widget.CardView
+-                        android:layout_width="match_parent"
+-                        app:cardElevation="20dp"
+-                        app:cardCornerRadius="20dp"
+-                        android:layout_margin="5dp"
+-                        android:layout_height="wrap_content"/>
+-
+-
+-
+-                </LinearLayout>
+-            </HorizontalScrollView>
+-
+-            <TextView
+-                android:layout_width="wrap_content"
+-                android:text="Top Doctors"
+-                android:textStyle="bold"
+-                android:textSize="28dp"
+-                android:layout_marginTop="10dp"
+-                android:textColor="#000"
+-                android:layout_marginHorizontal="10dp"
+-                android:layout_height="wrap_content"/>
+-
+-            <LinearLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="match_parent"
+-                android:orientation="vertical"
+-                android:layout_marginTop="10dp">
+-
+-                <androidx.cardview.widget.CardView
+-                    android:layout_width="match_parent"
+-                    app:cardElevation="5dp"
+-                    app:cardCornerRadius="20dp"
+-                    android:layout_margin="5dp"
+-                    android:layout_height="wrap_content">
+-                    <LinearLayout
+-                        android:layout_width="match_parent"
+-                        android:layout_height="match_parent"
+-                        android:gravity="center"
+-                        android:paddingHorizontal="20dp"
+-                        android:paddingVertical="20dp"
+-                        android:background="@color/white"
+-                        android:orientation="horizontal">
+-
+-                        <ImageView
+-                            android:layout_width="50dp"
+-                            android:layout_height="50dp"/>
+-
+-                        <LinearLayout
+-                            android:layout_width="match_parent"
+-                            android:layout_height="wrap_content"
+-                            android:layout_marginLeft="10dp"
+-                            android:orientation="vertical">
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Dr. Nilesh Vijay Chaudhary"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="bold" />
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Neurologist"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="normal" />
+-
+-                        </LinearLayout>
+-                    </LinearLayout>
+-                </androidx.cardview.widget.CardView>
+-                <androidx.cardview.widget.CardView
+-                    android:layout_width="match_parent"
+-                    app:cardElevation="5dp"
+-                    app:cardCornerRadius="20dp"
+-                    android:layout_margin="5dp"
+-                    android:layout_height="wrap_content">
+-                    <LinearLayout
+-                        android:layout_width="match_parent"
+-                        android:layout_height="match_parent"
+-                        android:gravity="center"
+-                        android:paddingHorizontal="20dp"
+-                        android:paddingVertical="20dp"
+-                        android:background="@color/white"
+-                        android:orientation="horizontal">
+-
+-                        <ImageView
+-                            android:layout_width="50dp"
+-                            android:layout_height="50dp"/>
+-
+-                        <LinearLayout
+-                            android:layout_width="match_parent"
+-                            android:layout_height="wrap_content"
+-                            android:layout_marginLeft="10dp"
+-                            android:orientation="vertical">
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Dr. Shirish Hastak"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="bold" />
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Neurologist"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="normal" />
+-
+-                        </LinearLayout>
+-                    </LinearLayout>
+-                </androidx.cardview.widget.CardView>
+-                <androidx.cardview.widget.CardView
+-                    android:layout_width="match_parent"
+-                    app:cardElevation="5dp"
+-                    app:cardCornerRadius="20dp"
+-                    android:layout_margin="5dp"
+-                    android:layout_height="wrap_content">
+-                    <LinearLayout
+-                        android:layout_width="match_parent"
+-                        android:layout_height="match_parent"
+-                        android:gravity="center"
+-                        android:paddingHorizontal="20dp"
+-                        android:paddingVertical="20dp"
+-                        android:background="@color/white"
+-                        android:orientation="horizontal">
+-
+-                        <ImageView
+-                            android:layout_width="50dp"
+-                            android:layout_height="50dp"/>
+-
+-                        <LinearLayout
+-                            android:layout_width="match_parent"
+-                            android:layout_height="wrap_content"
+-                            android:layout_marginLeft="10dp"
+-                            android:orientation="vertical">
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Dr. Priyanka M Tater"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="bold" />
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Neurologist"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="normal" />
+-
+-                        </LinearLayout>
+-                    </LinearLayout>
+-                </androidx.cardview.widget.CardView>
+-                <androidx.cardview.widget.CardView
+-                    android:layout_width="match_parent"
+-                    app:cardElevation="5dp"
+-                    app:cardCornerRadius="20dp"
+-                    android:layout_margin="5dp"
+-                    android:layout_height="wrap_content">
+-                    <LinearLayout
+-                        android:layout_width="match_parent"
+-                        android:layout_height="match_parent"
+-                        android:gravity="center"
+-                        android:paddingHorizontal="20dp"
+-                        android:paddingVertical="20dp"
+-                        android:background="@color/white"
+-                        android:orientation="horizontal">
+-
+-                        <ImageView
+-                            android:layout_width="50dp"
+-                            android:layout_height="50dp"/>
+-
+-                        <LinearLayout
+-                            android:layout_width="match_parent"
+-                            android:layout_height="wrap_content"
+-                            android:layout_marginLeft="10dp"
+-                            android:orientation="vertical">
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Dr. Sejal Saheta"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="bold" />
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Dermatologist"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="normal" />
+-
+-                        </LinearLayout>
+-                    </LinearLayout>
+-                </androidx.cardview.widget.CardView>
+-                <androidx.cardview.widget.CardView
+-                    android:layout_width="match_parent"
+-                    app:cardElevation="5dp"
+-                    app:cardCornerRadius="20dp"
+-                    android:layout_margin="5dp"
+-                    android:layout_height="wrap_content">
+-                    <LinearLayout
+-                        android:layout_width="match_parent"
+-                        android:layout_height="match_parent"
+-                        android:gravity="center"
+-                        android:paddingHorizontal="20dp"
+-                        android:paddingVertical="20dp"
+-                        android:background="@color/white"
+-                        android:orientation="horizontal">
+-
+-                        <ImageView
+-                            android:layout_width="50dp"
+-                            android:layout_height="50dp"/>
+-
+-                        <LinearLayout
+-                            android:layout_width="match_parent"
+-                            android:layout_height="match_parent"
+-                            android:layout_marginLeft="10dp"
+-                            android:orientation="vertical">
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:text="Dr. Jeetendra Khatuja"
+-                                android:textStyle="bold"
+-                                android:gravity="center"
+-                                android:textSize="20dp"
+-                                android:textColor="#000"
+-                                android:layout_height="wrap_content"/>
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:text="Aesthetic Dermatologist"
+-                                android:textStyle="normal"
+-                                android:gravity="center"
+-                                android:textSize="20dp"
+-                                android:textColor="#000"
+-                                android:layout_height="wrap_content"/>
+-
+-                        </LinearLayout>
+-                    </LinearLayout>
+-                </androidx.cardview.widget.CardView>
+-
+-                <androidx.cardview.widget.CardView
+-                    android:layout_width="match_parent"
+-                    app:cardElevation="5dp"
+-                    app:cardCornerRadius="20dp"
+-                    android:layout_margin="5dp"
+-                    android:layout_height="wrap_content">
+-                    <LinearLayout
+-                        android:layout_width="match_parent"
+-                        android:layout_height="match_parent"
+-                        android:gravity="center"
+-                        android:paddingHorizontal="20dp"
+-                        android:paddingVertical="20dp"
+-                        android:background="@color/white"
+-                        android:orientation="horizontal">
+-
+-                        <ImageView
+-                            android:layout_width="50dp"
+-                            android:layout_height="50dp"/>
+-
+-                        <LinearLayout
+-                            android:layout_width="match_parent"
+-                            android:layout_height="wrap_content"
+-                            android:layout_marginLeft="10dp"
+-                            android:orientation="vertical">
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Dr. Natasha Tipnis"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="bold" />
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Neurologist"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="normal" />
+-
+-                        </LinearLayout>
+-                    </LinearLayout>
+-                </androidx.cardview.widget.CardView>
+-
+-                <androidx.cardview.widget.CardView
+-                    android:layout_width="match_parent"
+-                    app:cardElevation="5dp"
+-                    app:cardCornerRadius="20dp"
+-                    android:layout_margin="5dp"
+-                    android:layout_height="wrap_content">
+-                    <LinearLayout
+-                        android:layout_width="match_parent"
+-                        android:layout_height="match_parent"
+-                        android:gravity="center"
+-                        android:paddingHorizontal="20dp"
+-                        android:paddingVertical="20dp"
+-                        android:background="@color/white"
+-                        android:orientation="horizontal">
+-
+-                        <ImageView
+-                            android:layout_width="50dp"
+-                            android:layout_height="50dp"/>
+-
+-                        <LinearLayout
+-                            android:layout_width="match_parent"
+-                            android:layout_height="wrap_content"
+-                            android:layout_marginLeft="10dp"
+-                            android:orientation="vertical">
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Dr. Raina Nahar"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="bold" />
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Dermatologist"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="normal" />
+-
+-                        </LinearLayout>
+-                    </LinearLayout>
+-                </androidx.cardview.widget.CardView>
+-
+-                <androidx.cardview.widget.CardView
+-                    android:layout_width="match_parent"
+-                    app:cardElevation="5dp"
+-                    app:cardCornerRadius="20dp"
+-                    android:layout_margin="5dp"
+-                    android:layout_height="wrap_content">
+-                    <LinearLayout
+-                        android:layout_width="match_parent"
+-                        android:layout_height="match_parent"
+-                        android:gravity="center"
+-                        android:paddingHorizontal="20dp"
+-                        android:paddingVertical="20dp"
+-                        android:background="@color/white"
+-                        android:orientation="horizontal">
+-
+-                        <ImageView
+-                            android:layout_width="50dp"
+-                            android:layout_height="50dp"/>
+-
+-                        <LinearLayout
+-                            android:layout_width="match_parent"
+-                            android:layout_height="wrap_content"
+-                            android:layout_marginLeft="10dp"
+-                            android:orientation="vertical">
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Dr. Vinod Rambal"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="bold" />
+-
+-                            <TextView
+-                                android:layout_width="wrap_content"
+-                                android:layout_height="wrap_content"
+-                                android:gravity="center"
+-                                android:text="Neurosurgeon"
+-                                android:textColor="#000"
+-                                android:textSize="20dp"
+-                                android:textStyle="normal" />
+-
+-                        </LinearLayout>
+-                    </LinearLayout>
+-                </androidx.cardview.widget.CardView>
+-
+-            </LinearLayout>
+-
+-        </LinearLayout>
+-    </androidx.core.widget.NestedScrollView>
+-
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/values/ids.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/ids.xml b/app/src/main/res/values/ids.xml
+new file mode 100644
+--- /dev/null	(date 1712636431087)
++++ b/app/src/main/res/values/ids.xml	(date 1712636431087)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <item name="recycler_view_doctors" type="id" />
++    <item name="map_fragment" type="id" />
++    <item name="autocomplete_fragment_container" type="id" />
++    <item name="map" type="id" />
++</resources>
+\ No newline at end of file
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	
++++ b/app/src/main/res/values/strings.xml	(date 1712636431087)
+@@ -1,3 +1,5 @@
+ <resources>
+     <string name="app_name">AarogyaMitra</string>
++    <string name="title_activity_google_maps">GoogleMapsActivity</string>
++    <string name="google_maps_key">AIzaSyCJ0XbbWXGvOEpsAns6OmD6ty_2GyYeuhs</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/example/aarogyamitra/HomeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/aarogyamitra/HomeActivity.java b/app/src/main/java/com/example/aarogyamitra/HomeActivity.java
+--- a/app/src/main/java/com/example/aarogyamitra/HomeActivity.java	
++++ b/app/src/main/java/com/example/aarogyamitra/HomeActivity.java	(date 1712636430975)
+@@ -23,9 +23,8 @@
+         Intent intent = new Intent(this, openSkinCancerActivity.class);
+         startActivity(intent);
+     }
+-
+-    public void openFindDoctorActivity(View view) {
+-        Intent intent = new Intent(this, openFindDoctorActivity.class);
++    public void GoogleMapsActivity(View view) {
++        Intent intent = new Intent(this, GoogleMapsActivity.class);
+         startActivity(intent);
+     }
+ 
+Index: app/src/main/java/com/example/aarogyamitra/GoogleMapsActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/aarogyamitra/GoogleMapsActivity.java b/app/src/main/java/com/example/aarogyamitra/GoogleMapsActivity.java
+new file mode 100644
+--- /dev/null	(date 1712636430698)
++++ b/app/src/main/java/com/example/aarogyamitra/GoogleMapsActivity.java	(date 1712636430698)
+@@ -0,0 +1,122 @@
++package com.example.aarogyamitra;
++
++import android.Manifest;
++import android.content.pm.PackageManager;
++import android.os.Bundle;
++import android.widget.Toast;
++
++import androidx.annotation.NonNull;
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.core.app.ActivityCompat;
++import androidx.core.content.ContextCompat;
++
++import com.google.android.gms.maps.CameraUpdateFactory;
++import com.google.android.gms.maps.GoogleMap;
++import com.google.android.gms.maps.OnMapReadyCallback;
++import com.google.android.gms.maps.SupportMapFragment;
++import com.google.android.gms.maps.model.LatLng;
++import com.google.android.gms.maps.model.MarkerOptions;
++import com.google.android.libraries.places.api.Places;
++import com.google.android.libraries.places.api.model.Place;
++import com.google.android.libraries.places.api.net.PlacesClient;
++import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
++import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
++import com.google.android.gms.common.api.Status;
++
++import java.util.Arrays;
++
++public class GoogleMapsActivity extends AppCompatActivity implements OnMapReadyCallback {
++
++    private GoogleMap mMap;
++    private static final float DEFAULT_ZOOM = 15f;
++    private static final String TAG = "GoogleMapsActivity";
++
++    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_google_maps);
++
++        // Initialize Places SDK
++        Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
++
++        // Check and request location permissions
++        if (checkLocationPermissions()) {
++            // Location permissions are already granted, proceed with map initialization
++            initMap();
++        } else {
++            // Request location permissions
++            requestLocationPermissions();
++        }
++    }
++
++    private boolean checkLocationPermissions() {
++        // Check if ACCESS_FINE_LOCATION permission is granted
++        return ContextCompat.checkSelfPermission(this,
++                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
++    }
++
++    private void requestLocationPermissions() {
++        // Request ACCESS_FINE_LOCATION permission
++        ActivityCompat.requestPermissions(this,
++                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
++                LOCATION_PERMISSION_REQUEST_CODE);
++    }
++
++    @Override
++    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
++        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
++        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
++            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
++                // Location permissions granted, proceed with map initialization
++                initMap();
++            } else {
++                // Location permissions denied, handle accordingly (e.g., show a message)
++                Toast.makeText(this, "Location permissions denied", Toast.LENGTH_SHORT).show();
++            }
++        }
++    }
++
++    private void initMap() {
++        // Initialize AutocompleteSupportFragment
++        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
++                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment_container);
++
++        // Specify the types of place data to return
++        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
++
++        // Set up a PlaceSelectionListener to handle the user's selection
++        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
++            @Override
++            public void onPlaceSelected(@NonNull Place place) {
++                // Handle the selected place
++                LatLng placeLatLng = place.getLatLng();
++                if (placeLatLng != null) {
++                    mMap.clear();
++                    mMap.addMarker(new MarkerOptions().position(placeLatLng).title(place.getName()));
++                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(placeLatLng, DEFAULT_ZOOM));
++                }
++            }
++
++            @Override
++            public void onError(@NonNull Status status) {
++                // Handle errors
++                Toast.makeText(GoogleMapsActivity.this, "Error: " + status.getStatusMessage(), Toast.LENGTH_SHORT).show();
++            }
++        });
++
++        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
++        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
++                .findFragmentById(R.id.map);
++        if (mapFragment != null) {
++            mapFragment.getMapAsync(this);
++        }
++    }
++
++    @Override
++    public void onMapReady(GoogleMap googleMap) {
++        mMap = googleMap;
++        // You can customize the map settings here
++    }
++}
+Index: app/src/main/java/com/example/aarogyamitra/openFindDoctorActivity.java
+===================================================================
+diff --git a/app/src/main/java/com/example/aarogyamitra/openFindDoctorActivity.java b/app/src/main/java/com/example/aarogyamitra/openFindDoctorActivity.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/aarogyamitra/openFindDoctorActivity.java	
++++ /dev/null	
+@@ -1,14 +0,0 @@
+-package com.example.aarogyamitra;
+-
+-import androidx.appcompat.app.AppCompatActivity;
+-
+-import android.os.Bundle;
+-
+-public class openFindDoctorActivity extends AppCompatActivity {
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_open_find_doctor);
+-    }
+-}
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	(date 1712636430064)
+@@ -1,6 +1,11 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:tools="http://schemas.android.com/tools">
++    xmlns:tools="http://schemas.android.com/tools"
++    tools:ignore="CoarseFineLocation">
++
++    <uses-permission
++        android:name="android.permission.ACCESS_FINE_LOCATION"
++        tools:ignore="CoarseFineLocation" />
+ 
+     <application
+         android:allowBackup="true"
+@@ -10,13 +15,30 @@
+         android:label="@string/app_name"
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
++        android:enableOnBackInvokedCallback="true"
+         android:theme="@style/Theme.AarogyaMitra"
+         tools:targetApi="31">
++
++        <!--
++             TODO: Before you run your application, you need a Google Maps API key.
++
++             To get one, follow the directions here:
++
++                https://developers.google.com/maps/documentation/android-sdk/get-api-key
++
++             Once you have your API key (it starts with "AIza"), define a new property in your
++             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
++             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
++        -->
++        <meta-data
++            android:name="com.google.android.geo.API_KEY"
++            android:value="AIzaSyCJ0XbbWXGvOEpsAns6OmD6ty_2GyYeuhs" />
++
+         <activity
+-            android:name=".openEducationCommunityActivity"
++            android:name=".GoogleMapsActivity"
+             android:exported="true" />
+         <activity
+-            android:name=".openFindDoctorActivity"
++            android:name=".openEducationCommunityActivity"
+             android:exported="true" />
+         <activity
+             android:name=".openSkinCancerActivity"
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	
++++ b/app/build.gradle.kts	(date 1712636429908)
+@@ -1,5 +1,6 @@
+ plugins {
+     id("com.android.application")
++    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+ }
+ 
+ android {
+@@ -45,7 +46,13 @@
+     implementation("org.tensorflow:tensorflow-lite-support:0.1.0")
+     implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0")
+     implementation("org.tensorflow:tensorflow-lite-gpu:2.3.0")
++    implementation("com.google.android.gms:play-services-maps:18.1.0")
++    implementation ("com.android.volley:volley:1.2.1")
++
++    implementation ("com.google.android.libraries.places:places:2.4.0")
++
+     testImplementation("junit:junit:4.13.2")
+     androidTestImplementation("androidx.test.ext:junit:1.1.5")
+     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+-}
+\ No newline at end of file
++}
++
